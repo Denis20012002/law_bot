@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+<h3>Вопрос #{{item.id}}</h3>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <strong>Статус:</strong> 
+    {% if item.status == 'в ожидании' %}
+      <span class="badge badge-warning">В ожидании</span>
+    {% else %}
+      <span class="badge badge-success">Обработано</span>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Вопрос пользователя (ID: {{item.user_id}}):</h5>
+    <p class="card-text">{{item.question_text}}</p>
+  </div>
+</div>
+
+{% if item.answer_text %}
+<div class="card mb-3">
+  <div class="card-header">
+    <strong>Текущий ответ:</strong>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{item.answer_text}}</p>
+  </div>
+</div>
+{% endif %}
+
+<div class="card">
+  <div class="card-header">
+    <strong>Ответить на вопрос:</strong>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="/answers/{{item.id}}/reply">
+      <div class="form-group">
+        <label for="answer_text">Ваш ответ:</label>
+        <textarea 
+          class="form-control" 
+          id="answer_text" 
+          name="answer_text" 
+          rows="5" 
+          required
+          placeholder="Введите ответ на вопрос пользователя..."
+        >{% if item.answer_text %}{{item.answer_text}}{% endif %}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Отправить ответ</button>
+      <a href="/answers" class="btn btn-secondary">Назад к списку</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

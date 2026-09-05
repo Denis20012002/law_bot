@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Добавление</h3>
+<form action="/category/add" method="post">
+    <div class="d-flex gap-3 align-items-center">
+        <h3 class="mr-3" for="text">Название: </h3>
+        <p class="m-0"><input type="text" id="text" name="name"></p>
+    </div>
+
+    <button text="Отправить" type="submit" type="button" class="btn btn-success mt-2" value="Submit">Добавить</button>
+</form>
+{% endblock %}

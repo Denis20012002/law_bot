@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block content %}
+<h3>Товары</h3>
+<h5>
+  <a class="bg-success p-2 m-1 text-white" href="{{ url_for('product_add') }}"
+    >Добавить</a
+  >
+</h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Название</th>
+      <th scope="col">Цена</th>
+      <th scope="col">Описание</th>
+      <th scope="col">Количество</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in items %}
+    <tr class="border-b odd:bg-white even:bg-gray-100">
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">{{i.id}}</div>
+      </td>
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">{{i.name}}</div>
+      </td>
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">{{i.price}}</div>
+      </td>
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">{{i.description}}</div>
+      </td>
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">{{i.cnt}}</div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

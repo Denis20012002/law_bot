@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block content %}
+<h3>Вопросы пользователей</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Вопрос</th>
+      <th scope="col">ID пользователя</th>
+      <th scope="col">Статус</th>
+      <th scope="col">Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in items %}
+    <tr class="border-b {% if i.status == 'в ожидании' %}table-warning{% else %}table-success{% endif %}">
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">{{i.id}}</div>
+      </td>
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">
+          {{i.question_text[:100]}}{% if i.question_text|length > 100 %}...{% endif %}
+        </div>
+      </td>
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">{{i.user_id}}</div>
+      </td>
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">
+          {% if i.status == 'в ожидании' %}
+            <span class="badge badge-warning">В ожидании</span>
+          {% else %}
+            <span class="badge badge-success">Обработано</span>
+          {% endif %}
+        </div>
+      </td>
+      <td class="px-4 py-2">
+        <div class="flex items-center justify-center h-full">
+          <a class="btn btn-primary btn-sm" href="/answers/{{i.id}}">Ответить</a>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
